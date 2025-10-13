@@ -1,3 +1,16 @@
 spring:
   application:
     name: tj_lab2_advanced
+  profiles:
+    active: dev
+
+greeting-message: "Well hello there!"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: *
+  info:
+    env:
+      enabled: true
