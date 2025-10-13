@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: tj_lab2_advanced
