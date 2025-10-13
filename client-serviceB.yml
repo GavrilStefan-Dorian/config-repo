@@ -1,1 +1,3 @@
 message: "Generic message from Service B"
+server:
+  port: 8082
