@@ -1,16 +1,10 @@
-spring:
-  application:
-    name: tj_lab2_advanced
-  profiles:
-    active: dev
-
 message: "Well hello there!"
 
 management:
   endpoints:
     web:
       exposure:
-        include: info,metrics,health
+        include: '*'
   info:
     env:
       enabled: true
