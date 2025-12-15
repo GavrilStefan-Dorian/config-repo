@@ -1,7 +1,9 @@
 spring: 
   kafka:
+    # for grade events (Lab 7)
     bootstrap-servers: localhost:9092
     consumer:
+      # These settings apply to @KafkaListener methods
       group-id: prefschedule-consumer-group
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
@@ -11,11 +13,9 @@ spring:
         spring.json.value.default.type: org.example.tj_lab4.model.GradeEvent
       enable-auto-commit: false
       isolation-level: read_committed
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
     listener:
       ack-mode: record
+  # for event streaming lab 9
   cloud:
     function:
       definition: receiveMatchResult
@@ -25,6 +25,6 @@ spring:
           brokers: localhost:9092
       bindings:
         receiveMatchResult-in-0:
-          destination: match-results
-          group: prefschedule-group
-          content-type: application/json
+          destination: match-results  
+          group: prefschedule-group   
+          content-type: application/json  
