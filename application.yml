@@ -1,10 +1,10 @@
-message: "Well hello there!"
+# message: "Well hello there!"
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  info:
-    env:
-      enabled: true
+# management:
+#   endpoints:
+#     web:
+#       exposure:
+#         include: '*'
+#   info:
+#     env:
+#       enabled: true
