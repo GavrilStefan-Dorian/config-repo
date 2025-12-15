@@ -1,21 +1,14 @@
-kafka:
-  bootstrap-servers: localhost:9092
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info,metrics,prometheus
-  endpoint:
-    health:
-      show-details: always
-    metrics:
-      access: unrestricted
-  metrics:
-    enable:
-      all: true
-
-logging:
-  level:
-    root: INFO
-    org.example.stablematch: DEBUG
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        processMatch-in-0:
+          destination: match-requests
+          group: stablematch-group
+        processMatch-out-0:
+          destination: match-results
