@@ -1,13 +1,30 @@
-kafka:
-  bootstrap-servers: localhost:9092
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info,metrics,prometheus
-
-logging:
-  level:
-    root: INFO
-    com.yourpackage: DEBUG
+spring: 
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: prefschedule-consumer-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.value.default.type: org.example.tj_lab4.model.GradeEvent
+      enable-auto-commit: false
+      isolation-level: read_committed
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    listener:
+      ack-mode: record
+  cloud:
+    function:
+      definition: receiveMatchResult
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        receiveMatchResult-in-0:
+          destination: match-results
+          group: prefschedule-group
+          content-type: application/json
