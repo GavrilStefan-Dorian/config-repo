@@ -48,3 +48,6 @@ spring:
           destination: match-results
           group: prefschedule-group
           content-type: application/json
+
+jwt:
+  secret: "d6c5f4a9c2b14e7f9a0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e"
