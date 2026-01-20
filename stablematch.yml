@@ -1,14 +1,33 @@
-
 spring:
+  application:
+    name: stablematch
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/stablematch_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: kafka:29092
+
   cloud:
     function:
       definition: processMatch
     stream:
       kafka:
         binder:
-          brokers: localhost:9092
+          brokers: kafka:29092
       bindings:
         processMatch-in-0:
           destination: match-requests
