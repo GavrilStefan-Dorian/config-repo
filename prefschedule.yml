@@ -1,7 +1,26 @@
-spring: 
+spring:
+  application:
+    name: prefschedule
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/prefschedule_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+
   kafka:
     # for grade events (Lab 7)
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: kafka:29092
     consumer:
       # These settings apply to @KafkaListener methods
       group-id: prefschedule-consumer-group
@@ -15,6 +34,7 @@ spring:
       isolation-level: read_committed
     listener:
       ack-mode: record
+
   # for event streaming lab 9
   cloud:
     function:
@@ -22,9 +42,9 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: localhost:9092
+          brokers: kafka:29092
       bindings:
         receiveMatchResult-in-0:
-          destination: match-results  
-          group: prefschedule-group   
-          content-type: application/json  
+          destination: match-results
+          group: prefschedule-group
+          content-type: application/json
